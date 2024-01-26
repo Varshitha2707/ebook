@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style/index_style.css')}}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">OnlineBookApp</div>
+            <ul class="menu-bar">
+                {% if 'logged_in' not in session or not session['logged_in'] %}
+                    <li><a href="{{ url_for('customer_signup') }}">Signup</a></li>
+                    <li><a href="{{ url_for('customer_login') }}">Login</a></li>
+                    <li><a href="{{ url_for('admin_login') }}">Admin</a></li>
+                    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+                {% else %}
+                    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+                {% endif %}
+                
+            </ul>
+        </nav>
+    </header>
+    
+    <h1 class="heading">WELCOME TO ONLINE BOOK READING APP</h1>
+    <div class="sub-heading">
+        <h3>The Magic of Reading</h3>
+        <h4>More good books for you</h4>
+    </div>
+</body>
+</html>

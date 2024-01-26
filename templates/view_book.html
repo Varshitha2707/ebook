@@ -1,0 +1,17 @@
+<!-- templates/view_book.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p>Author: {{ book.author }}</p>
+    <embed src="{{ url_for('static', filename='pdfs/' + book.pdf) }}" width="90%%" height="1000px" />
+    <br>
+    <a href="{{ url_for('index') }}">Back to Book Library</a>
+</body>
+</html>

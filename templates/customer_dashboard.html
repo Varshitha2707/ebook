@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reading App</title>
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='style/style.css')}}"> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header{
+            background-color: white;
+            color: rgb(0, 0, 0);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px auto;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #40b736;
+        }
+        .menu-bar{
+            /* height: 50px; */
+            list-style: none;
+            display: flex;
+            overflow: hidden;
+            background-color: white;
+            border-radius: 10px;
+        }
+        .menu-bar li{
+            margin-right: 20px;
+        }
+        .menu-bar a{
+            float: left;
+            color: black;
+            text-align: center;
+            padding-left: 16px;
+            padding-right: 16px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .menu-bar a:hover{
+            background-color: white;
+            color: orangered;
+        }
+        h1 {
+            text-align: center;
+            padding-top: 100px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">OnlineBookApp</div>
+            <ul class="menu-bar">
+                {% if 'logged_in' in session or session['logged_in'] %}
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('customer_signup') }}">Signup</a></li>
+                    <li><a href="{{ url_for('customer_login') }}">Login</a></li>
+                    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+                {% endif %}
+                
+            </ul>
+        </nav>
+    </header>
+    <h1>Book Library</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>
+                        <a href="{{ url_for('view_book', id=book.id) }}">Read</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
